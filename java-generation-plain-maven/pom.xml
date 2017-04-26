@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>tutorial-protobuf</artifactId>
@@ -24,16 +24,20 @@
         <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
         <maven-shade-plugin.version>2.4.2</maven-shade-plugin.version>
         <os-maven-plugin.version>1.4.1.Final</os-maven-plugin.version>
-        <protobuf.version>3.2.0</protobuf.version>
 
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>${protobuf.version}</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -87,16 +91,18 @@
                         <phase>generate-sources</phase>
                         <configuration>
                             <target>
-                                <property name="protoc.filename" value="protoc-${protobuf.version}-${os.detected.classifier}.exe"/>
+                                <property name="protoc.filename"
+                                          value="protoc-${protobuf.version}-${os.detected.classifier}.exe"/>
                                 <property name="protoc.filepath" value="${project.build.directory}/${protoc.filename}"/>
                                 <chmod file="${protoc.filepath}" perm="ugo+rx"/>
-                                <mkdir dir="${protobuf.output.directory}" />
+                                <mkdir dir="${protobuf.output.directory}"/>
                                 <path id="protobuf.input.filepaths.path">
                                     <fileset dir="${protobuf.input.directory}">
                                         <include name="**/*.proto"/>
                                     </fileset>
                                 </path>
-                                <pathconvert pathsep=" " property="protobuf.input.filepaths" refid="protobuf.input.filepaths.path"/>
+                                <pathconvert pathsep=" " property="protobuf.input.filepaths"
+                                             refid="protobuf.input.filepaths.path"/>
                                 <exec executable="${protoc.filepath}" failonerror="true">
                                     <arg value="-I"/>
                                     <arg value="${protobuf.input.directory}"/>
