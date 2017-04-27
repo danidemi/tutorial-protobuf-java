@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tutorial-protobuf</artifactId>
+        <groupId>com.danidemi.tutorial</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>protostuff-java-generation</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.protostuff</groupId>
+                <artifactId>protostuff-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <configuration>
+                    <protoModules>
+                        <protoModule>
+                            <source>src/main/proto</source>
+                            <outputDir>target/generated-sources/proto</outputDir>
+                            <output>java_bean</output>
+                        </protoModule>
+                    </protoModules>
+                </configuration>
+                <executions>
+
+                    <execution>
+                        <id>generate-sources-java</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <protoModules>
+                                <protoModule>
+                                    <source>src/main/proto</source>
+                                    <outputDir>target/generated-sources/proto</outputDir>
+                                    <output>java_bean</output>
+                                </protoModule>
+                            </protoModules>
+                        </configuration>
+                    </execution>
+
+                    <!--
+                    <execution>
+                        <id>generate-sources-gwt-overlay</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    <name>com.danidemi.protobuf</name>
+                                    <value>com.danidemi.protobufgwtoverlay</value>
+                                </property>
+                            </properties>
+                            <protoModules>
+                                <protoModule>
+                                    <source>src/main/proto</source>
+                                    <outputDir>target/generated-sources/gwt_overlay</outputDir>
+                                    <output>gwt_overlay</output>
+                                </protoModule>
+                            </protoModules>
+                        </configuration>
+                    </execution>
+                    -->
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

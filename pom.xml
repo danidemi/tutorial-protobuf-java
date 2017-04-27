@@ -5,6 +5,7 @@
     <modules>
         <module>java-generation-plain-maven</module>
         <module>java-generation-with-protoc-jar-maven-plugin</module>
+        <module>protostuff-java-generation</module>
     </modules>
     <groupId>com.danidemi.tutorial</groupId>
     <version>0.0.1-SNAPSHOT</version>

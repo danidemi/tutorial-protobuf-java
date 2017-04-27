@@ -1,0 +1,26 @@
+syntax = "proto2";
+package com.danidemi;
+option java_package = "com.danidemi.protobuf";
+option java_outer_classname = "Training";
+
+message Course {
+    optional int32 id = 1;
+    optional string course_name = 2;
+    repeated Student student = 3;
+}
+
+message Student {
+    optional int32 id = 1;
+    optional string first_name = 2;
+    optional string last_name = 3;
+    optional string email = 4;
+    repeated PhoneNumber phone = 5;
+    message PhoneNumber {
+        optional string number = 1;
+        optional PhoneType type = 2;
+    }
+    enum PhoneType {
+        MOBILE = 0;
+        LANDLINE = 1;
+    }
+}
